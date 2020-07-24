@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<meta charset="utf-8" />
+
+<th:block th:include="fragments/header"></th:block>
+
+<body class="">
+	<div class="wrapper ">
+
+		<th:block th:include="fragments/sidebarLeft :: active('employes')"></th:block>
+
+		<div class="main-panel">
+			<!-- Navbar -->
+			<th:block th:include="fragments/navbar"></th:block>
+			<!-- End Navbar -->
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header card-header-primary">
+									<h4 class="card-title ">Simple Table</h4>
+									<p class="card-category">Here is a subtitle for this table</p>
+								</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table">
+											<thead class=" text-primary">
+												<th>ID</th>
+												<th>Nom</th>
+												<th>Prénom</th>
+												<th>Email</th>
+												<th>City</th>
+												<th>Type</th>
+												<th>Departement</th>
+												<th>Remuneration</th>
+												<th></th>
+											</thead>
+											<tbody>
+												<tr th:each="element : ${liste}">
+													<td th:text="${element.id}"></td>
+
+													<td
+														th:text="${element.firstName != null} ? ${element.firstName} : '_'"></td>
+													<td
+														th:text="${element.lastName != null} ? ${element.lastName} : '_'"></td>
+													<td
+														th:text="${element.email != null} ? ${element.email} : '_'"></td>
+													<td
+														th:text="${element.city != null} ? ${element.city} : '_'"></td>
+													<td
+														th:text="${element.typeEmploye != null} ? ${element.typeEmploye} : '_'"></td>
+													<td
+														th:text="${element?.departement?.label != null} ? ${element?.departement?.label}  : '_'"></td>
+													<td
+														th:text="${element?.remuneration?.name != null} ? ${element?.remuneration?.name}  : '_'"></td>
+													<td class="td-actions text-right">
+														<button th:if="${element.typeEmploye == T(com.example.gestionRH.enumeration.TypeEmploye).Manager}"
+															type="button" rel="tooltip" title="list SousJacents"
+															class="btn btn-primary btn-link btn-sm">
+															<a
+																th:href="@{'/employes/listSousJacents?id=' + ${element.id}}"><i
+																class="material-icons">group</i></a>
+														</button>
+														<button type="button" rel="tooltip" title="Edit Employe"
+															class="btn btn-primary btn-link btn-sm">
+															<a
+																th:href="@{'/employes/updateEmploye?id=' + ${element.id}}"><i
+																class="material-icons">edit</i></a>
+														</button>
+														<button type="button" rel="tooltip" title="Remove Employe"
+															class="btn btn-danger btn-link btn-sm">
+															<a
+																th:href="@{'/employes/deleteEmploye?id=' + ${element.id}}"><i
+																class="material-icons">close</i></a>
+														</button>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<th:block th:include="fragments/footer"></th:block>
+		</div>
+	</div>
+
+	<th:block th:include="fragments/sidebarfiltres"></th:block>
+	<th:block th:include="fragments/scripts"></th:block>
+</body>
+
+</html>

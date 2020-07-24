@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<meta charset="utf-8" />
+
+<th:block th:include="fragments/header"></th:block>
+
+<body class="">
+	<div class="wrapper ">
+
+		<th:block th:include="fragments/sidebarLeft :: active('profil')"></th:block>
+
+		<div class="main-panel">
+			<!-- Navbar -->
+			<th:block th:include="fragments/navbar"></th:block>
+			<!-- End Navbar -->
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-8">
+							<div class="card">
+								<div class="card-header card-header-primary">
+									<h4 class="card-title" th:text="${userInfo.lastName} + ' ' + ${userInfo.firstName}">Profile</h4>
+									<p class="card-category">My profile</p>
+								</div>
+								<div class="card-body">
+									<form action="" method="" name='f' th:object="${userInfo}">
+										<div class="row">
+											<div class="col-md-5">
+												<div class="form-group">
+													<label class="bmd-label-floating">Nom </label> <input
+														th:field="*{lastName}" type="text" th:value="''"
+														class="form-control" disabled>
+												</div>
+											</div>
+											<div class="col-md-3">
+												<div class="form-group">
+													<label class="bmd-label-floating">Prénom</label> <input
+														th:field="*{firstName}" type="text" th:value="''"
+														class="form-control" disabled>
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="form-group">
+													<label class="bmd-label-floating">Email address</label> <input
+														th:field="*{email}" th:value="''" type="email"
+														class="form-control" disabled>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="bmd-label-floating">Username</label> <input
+														th:field="*{username}" th:value="''" type="text"
+														class="form-control" disabled>
+												</div>
+											</div>
+											
+										</div>
+										<div class="row">
+											<div class="col-md-12">
+												<div class="form-group">
+													<label class="bmd-label-floating">Adress</label> <input
+														th:field="*{adress}" type="text" th:value="''"
+														class="form-control" disabled>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-4">
+												<div class="form-group">
+													<label class="bmd-label-floating">City</label> <input
+														th:field="*{city}" type="text" th:value="''"
+														class="form-control" disabled>
+												</div>
+											</div>
+
+											<div class="col-md-4">
+												<div class="form-group">
+													<label class="bmd-label-floating">Country</label> <input
+														th:field="*{country}" type="text" th:value="''"
+														class="form-control" disabled>
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="form-group">
+													<label class="bmd-label-floating">Postal Code</label> <input
+														th:field="*{postalCode}" type="text" th:value="''"
+														class="form-control" disabled>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-4">
+													<select class="selectpicker"
+														data-style="btn btn-primary btn-round" title="Departement"
+														th:field="*{departement.id}" disabled>
+														<option th:each="departement : ${allDepartements}"
+															th:value="${departement.id}"
+															th:text="${departement.label} + '-' + ${departement.type}"></option>
+
+													</select>
+												</div>
+											</div>
+										</div>
+								
+
+										<div class="clearfix"></div>
+									</form>
+								</div>
+							</div>
+						</div>
+				
+					</div>
+				</div>
+			</div>
+			<th:block th:include="fragments/footer"></th:block>
+		</div>
+	</div>
+
+	<th:block th:include="fragments/sidebarfiltres"></th:block>
+	<th:block th:include="fragments/scripts"></th:block>
+</body>
+
+</html>

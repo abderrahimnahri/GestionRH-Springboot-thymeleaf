@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8" />
+
+<th:block th:include="fragments/header"></th:block>
+
+<body class="">
+	<div class="wrapper ">
+
+		<th:block th:include="fragments/sidebarLeft :: active('sousJacents')"></th:block>
+
+		<div class="main-panel">
+			<!-- Navbar -->
+			<th:block th:include="fragments/navbar"></th:block>
+			<!-- End Navbar -->
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header card-header-primary">
+									<h4 class="card-title ">Simple Table</h4>
+									<p class="card-category">Here is a subtitle for this table</p>
+								</div>
+								<div class="card-body">
+									<!-- <form th:action="@{'/employes/addSousJacent?id=' + ${employe.id}}" -->
+									<form th:action="@{'/employes/addSousJacent?idSup=' + ${employe.id}}"	method="post" name='f' th:object="${sousJacent}">
+										<div class="col-md-12">
+											<select class="selectpicker"
+												data-style="btn btn-primary btn-round" title="Sous Jacent"
+												th:field="*{id}">
+												<option th:each="emp : ${employes}"
+													th:value="${emp.id}"
+													th:text="${emp.firstName} + ' ' + ${emp.lastName}"></option>
+											</select>
+										</div>
+										<button type="submit" class="btn btn-primary pull-right"
+											value="Valider">Ajouter</button>
+										<div class="clearfix"></div>
+									</form>
+									<div class="table-responsive">
+										<table class="table">
+											<thead class=" text-primary">
+												<th>ID</th>
+												<th>Nom</th>
+												<th>Prénom</th>
+												<th>Email</th>
+												<th>City</th>
+												<th>Country</th>
+												<th>Departement</th>
+												<th></th>
+											</thead>
+											<tbody>
+												<tr th:each="element : ${liste}">
+													<td th:text="${element.id}"></td>
+
+													<td
+														th:text="${element.firstName != null} ? ${element.firstName} : '_'"></td>
+													<td
+														th:text="${element.lastName != null} ? ${element.lastName} : '_'"></td>
+													<td
+														th:text="${element.email != null} ? ${element.email} : '_'"></td>
+													<td
+														th:text="${element.city != null} ? ${element.city} : '_'"></td>
+													<td
+														th:text="${element.country != null} ? ${element.country} : '_'"></td>
+													<td
+														th:text="${element?.departement?.label != null} ? ${element?.departement?.label}  : '_'"></td>
+													<td class="td-actions text-right">
+														<button type="button" rel="tooltip"
+															title="Remove Sous Jacent"
+															class="btn btn-danger btn-link btn-sm">
+															<a
+																th:href="@{'/employes/deleteSousJacent?id=' + ${employe.id} + '&idSousJacent=' + ${element.id}}"><i
+																class="material-icons">close</i></a>
+														</button>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<th:block th:include="fragments/footer"></th:block>
+		</div>
+	</div>
+
+	<th:block th:include="fragments/sidebarfiltres"></th:block>
+	<th:block th:include="fragments/scripts"></th:block>
+</body>
+
+</html>
